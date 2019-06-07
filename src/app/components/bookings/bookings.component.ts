@@ -7,6 +7,7 @@ import { BookingService } from 'src/app/services/booking.service';
   templateUrl: './bookings.component.html',
   styleUrls: ['./bookings.component.scss']
 })
+
 export class BookingsComponent implements OnInit {
 
   public bookings: Array<Booking>;
@@ -14,9 +15,7 @@ export class BookingsComponent implements OnInit {
   constructor(private bookingService: BookingService) {}
 
   ngOnInit() {
-    this.bookingService.getAllBookings().subscribe((response) => {
-      this.bookings = response;
-    });
+    this.bookings = this.bookingService.getAllBookings();
   }
 
 }

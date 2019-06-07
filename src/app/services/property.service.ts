@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Property } from '../models/property';
 
 @Injectable({
@@ -8,9 +7,20 @@ import { Property } from '../models/property';
 })
 export class PropertyService {
 
-  constructor(private httpClient: HttpClient) {}
+  public properties: Array<Property>;
 
-  getAllProperties(): Observable<Array<Property>> {
-    return this.httpClient.get<Array<Property>>('http://localhost:3000/properties');
+  constructor(private httpClient: HttpClient) {
+    this.loadAllProperties();
   }
+
+  loadAllProperties() {
+    this.httpClient.get('http://localhost:3000/properties').subscribe((response: Array<Property>) => {
+      this.properties = response;
+    });
+  }
+
+  getAllProperties(): Array<Property> {
+    return this.properties;
+  }
+
 }

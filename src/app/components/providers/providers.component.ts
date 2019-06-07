@@ -7,6 +7,7 @@ import { Person } from 'src/app/models/person';
   templateUrl: './providers.component.html',
   styleUrls: ['./providers.component.scss']
 })
+
 export class ProvidersComponent implements OnInit {
 
   public providers: Array<Person>;
@@ -14,9 +15,7 @@ export class ProvidersComponent implements OnInit {
   constructor(private providerService: ProviderService) {}
 
   ngOnInit() {
-    this.providerService.getAllProviders().subscribe((response) => {
-      this.providers = response;
-    });
+    this.providers = this.providerService.getAllProviders();
   }
 
 }

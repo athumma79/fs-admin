@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Person } from '../models/person';
 
 @Injectable({
@@ -8,9 +7,20 @@ import { Person } from '../models/person';
 })
 export class ProviderService {
 
-  constructor(private httpClient: HttpClient) {}
+  public providers: Array<Person>;
 
-  getAllProviders(): Observable<Array<Person>> {
-    return this.httpClient.get<Array<Person>>('http://localhost:3000/providers');
+  constructor(private httpClient: HttpClient) {
+    this.loadAllProviders();
   }
+
+  loadAllProviders() {
+    this.httpClient.get('http://localhost:3000/providers').subscribe((response: Array<Person>) => {
+      this.providers = response;
+    });
+  }
+
+  getAllProviders(): Array<Person> {
+    return this.providers;
+  }
+
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Booking } from '../models/booking';
 
 @Injectable({
@@ -8,9 +7,20 @@ import { Booking } from '../models/booking';
 })
 export class BookingService {
 
-  constructor(private httpClient: HttpClient) {}
+  public bookings: Array<Booking>;
 
-  getAllBookings(): Observable<Array<Booking>> {
-    return this.httpClient.get<Array<Booking>>('http://localhost:3000/bookings');
+  constructor(private httpClient: HttpClient) {
+    this.loadAllBookings();
   }
+
+  loadAllBookings() {
+    this.httpClient.get('http://localhost:3000/bookings').subscribe((response: Array<Booking>) => {
+      this.bookings = response;
+    });
+  }
+
+  getAllBookings(): Array<Booking> {
+    return this.bookings;
+  }
+
 }

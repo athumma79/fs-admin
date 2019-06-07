@@ -7,6 +7,7 @@ import { PropertyService } from 'src/app/services/property.service';
   templateUrl: './properties.component.html',
   styleUrls: ['./properties.component.scss']
 })
+
 export class PropertiesComponent implements OnInit {
 
   public properties: Array<Property>;
@@ -14,9 +15,7 @@ export class PropertiesComponent implements OnInit {
   constructor(private propertyService: PropertyService) {}
 
   ngOnInit() {
-    this.propertyService.getAllProperties().subscribe((response) => {
-      this.properties = response;
-    });
+    this.properties = this.propertyService.getAllProperties();
   }
 
 }

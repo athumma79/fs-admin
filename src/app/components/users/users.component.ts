@@ -7,6 +7,7 @@ import { Person } from 'src/app/models/person';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
+
 export class UsersComponent implements OnInit {
 
   public users: Array<Person>;
@@ -14,9 +15,7 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.userService.getAllUsers().subscribe((response) => {
-      this.users = response;
-    });
+    this.users = this.userService.getAllUsers();
   }
 
 }
