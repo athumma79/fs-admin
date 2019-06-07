@@ -1,3 +1,22 @@
-<p>
-  providers works!
-</p>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Password</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let provider of providers">
+        <td>{{provider.id}}</td>
+        <td>{{provider.firstname}}</td>
+        <td>{{provider.lastname}}</td>
+        <td>{{provider.email}}</td>
+        <td>{{provider.password}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
