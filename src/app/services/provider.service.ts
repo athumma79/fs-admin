@@ -7,20 +7,12 @@ import { Person } from '../models/person';
 })
 export class ProviderService {
 
-  public providers: Array<Person>;
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) {
-    this.loadAllProviders();
-  }
-
-  loadAllProviders() {
+  getAllProviders(assign: Function) {
     this.httpClient.get('http://localhost:3000/providers').subscribe((response: Array<Person>) => {
-      this.providers = response;
+      assign(response);
     });
-  }
-
-  getAllProviders(): Array<Person> {
-    return this.providers;
   }
 
 }

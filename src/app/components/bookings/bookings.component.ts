@@ -10,12 +10,15 @@ import { BookingService } from 'src/app/services/booking.service';
 
 export class BookingsComponent implements OnInit {
 
-  public bookings: Array<Booking>;
+  public bookings: Array<Booking> = new Array();
 
-  constructor(private bookingService: BookingService) {}
+  constructor(private bookingService: BookingService) {
+    this.bookingService.getAllBookings((res) => {
+      this.bookings = res;
+    });
+  }
 
   ngOnInit() {
-    this.bookings = this.bookingService.getAllBookings();
   }
 
 }

@@ -7,20 +7,12 @@ import { Property } from '../models/property';
 })
 export class PropertyService {
 
-  public properties: Array<Property>;
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) {
-    this.loadAllProperties();
-  }
-
-  loadAllProperties() {
+  getAllProperties(assign: Function) {
     this.httpClient.get('http://localhost:3000/properties').subscribe((response: Array<Property>) => {
-      this.properties = response;
+      assign(response);
     });
-  }
-
-  getAllProperties(): Array<Property> {
-    return this.properties;
   }
 
 }

@@ -10,12 +10,15 @@ import { Person } from 'src/app/models/person';
 
 export class UsersComponent implements OnInit {
 
-  public users: Array<Person>;
+  public users: Array<Person> = new Array();
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {
+    this.userService.getAllUsers((res) => {
+      this.users = res;
+    });
+  }
 
   ngOnInit() {
-    this.users = this.userService.getAllUsers();
   }
 
 }

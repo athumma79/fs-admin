@@ -7,20 +7,12 @@ import { Booking } from '../models/booking';
 })
 export class BookingService {
 
-  public bookings: Array<Booking>;
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) {
-    this.loadAllBookings();
-  }
-
-  loadAllBookings() {
+  getAllBookings(assign: Function) {
     this.httpClient.get('http://localhost:3000/bookings').subscribe((response: Array<Booking>) => {
-      this.bookings = response;
+      assign(response);
     });
-  }
-
-  getAllBookings(): Array<Booking> {
-    return this.bookings;
   }
 
 }

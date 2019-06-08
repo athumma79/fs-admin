@@ -10,12 +10,15 @@ import { Person } from 'src/app/models/person';
 
 export class ProvidersComponent implements OnInit {
 
-  public providers: Array<Person>;
+  public providers: Array<Person> = new Array();
 
-  constructor(private providerService: ProviderService) {}
+  constructor(private providerService: ProviderService) {
+    this.providerService.getAllProviders((res) => {
+      this.providers = res;
+    });
+  }
 
   ngOnInit() {
-    this.providers = this.providerService.getAllProviders();
   }
 
 }

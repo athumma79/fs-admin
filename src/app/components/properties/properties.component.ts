@@ -10,12 +10,15 @@ import { PropertyService } from 'src/app/services/property.service';
 
 export class PropertiesComponent implements OnInit {
 
-  public properties: Array<Property>;
+  public properties: Array<Property> = new Array();
 
-  constructor(private propertyService: PropertyService) {}
+  constructor(private propertyService: PropertyService) {
+    this.propertyService.getAllProperties((res) => {
+      this.properties = res;
+    });
+  }
 
   ngOnInit() {
-    this.properties = this.propertyService.getAllProperties();
   }
 
 }
